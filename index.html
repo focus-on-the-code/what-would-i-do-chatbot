@@ -540,9 +540,66 @@
     @media (max-width: 640px) {
       .page { width: min(100% - 24px, 1180px); }
       header.hero { padding-top: 42px; }
-      .compare .row { grid-template-columns: 1fr; }
-      .compare .cell:nth-child(odd):not(.head) { background: white; }
+
+      .compare {
+        border: 0;
+        background: transparent;
+        display: grid;
+        gap: 14px;
+        overflow: visible;
+      }
+
+      .compare .row:first-child {
+        display: none;
+      }
+
+      .compare .row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 10px 28px rgba(31, 42, 55, 0.07);
+      }
+
+      .compare .cell {
+        padding: 18px;
+        font-size: 17px;
+        line-height: 1.45;
+      }
+
+      .compare .cell::before {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .compare .cell:first-child::before {
+        content: "It Is";
+        color: var(--teal);
+      }
+
+      .compare .cell:last-child::before {
+        content: "It Is Not";
+        color: var(--rose);
+      }
+
+      .compare .cell:first-child {
+        background: white;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .compare .cell:last-child {
+        background: #fbfaf8;
+      }
+
       .simple-step { grid-template-columns: 1fr; }
+
       .appendix-menu {
         left: 0;
         right: auto;
