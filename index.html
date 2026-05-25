@@ -154,7 +154,11 @@
       cursor: pointer;
     }
 
-    .copy-button:hover { background: rgba(255,255,255,.18); }
+    .copy-button:hover,
+    .copy-button:focus-visible {
+      background: rgba(255,255,255,.18);
+      outline: none;
+    }
 
     .section-divider {
       height: 1px;
@@ -167,6 +171,7 @@
       position: sticky;
       top: 0;
       z-index: 20;
+      overflow: visible;
       background: rgba(246,243,238,.86);
       backdrop-filter: blur(12px);
       border-top: 1px solid rgba(229,222,211,.8);
@@ -175,8 +180,9 @@
 
     nav {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
-      overflow-x: auto;
+      overflow: visible;
       padding: 13px 0;
       scrollbar-width: none;
     }
@@ -196,25 +202,39 @@
       cursor: pointer;
     }
 
-    nav a:hover, .nav-button:hover { color: var(--navy); border-color: #c8d7ef; background: var(--soft-blue); }
+    nav a:hover,
+    .nav-button:hover,
+    .nav-button:focus-visible,
+    .nav-button[aria-expanded="true"] {
+      color: var(--navy);
+      border-color: #c8d7ef;
+      background: var(--soft-blue);
+      outline: none;
+    }
 
-    .nav-dropdown { position: relative; flex: 0 0 auto; }
+    .nav-dropdown {
+      position: relative;
+      flex: 0 0 auto;
+    }
 
     .appendix-menu {
       display: none;
-      position: fixed;
-      top: 56px;
-      right: max(20px, calc((100vw - 1180px) / 2));
-      width: min(280px, calc(100vw - 40px));
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: min(300px, calc(100vw - 40px));
       padding: 10px;
-      background: rgba(255,255,255,.96);
+      background: rgba(255,255,255,.98);
       border: 1px solid var(--line);
       border-radius: 18px;
       box-shadow: var(--shadow);
       z-index: 40;
     }
 
-    .appendix-menu.open { display: grid; gap: 8px; }
+    .appendix-menu.open {
+      display: grid;
+      gap: 8px;
+    }
 
     .appendix-menu a {
       display: block;
@@ -226,7 +246,7 @@
     main { padding: 36px 0 80px; }
 
     section {
-      scroll-margin-top: 82px;
+      scroll-margin-top: 112px;
       margin: 34px 0;
     }
 
@@ -306,12 +326,6 @@
     .pill.blue { background: var(--soft-blue); color: var(--blue); }
     .pill.teal { background: var(--soft-teal); color: var(--teal); }
     .pill.gold { background: var(--soft-gold); color: var(--rose); }
-
-    .split-table {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
 
     .compare {
       overflow: hidden;
@@ -529,6 +543,11 @@
       .compare .row { grid-template-columns: 1fr; }
       .compare .cell:nth-child(odd):not(.head) { background: white; }
       .simple-step { grid-template-columns: 1fr; }
+      .appendix-menu {
+        left: 0;
+        right: auto;
+        width: min(300px, calc(100vw - 24px));
+      }
     }
   </style>
 </head>
@@ -1007,4 +1026,79 @@ Keep the plan practical for someone without a deep technical background. Prefer 
     <section id="next">
       <div class="callout">
         <div class="section-kicker" style="color:#b9e6fe;">Final takeaway</div>
-        <h2>Start small, test honestly, and only scale what works.</>
+        <h2>Start small, test honestly, and only scale what works.</h2>
+        <p>The immediate move is simple: paste the master prompt into Claude, answer the first discovery question, gather a small starter source bundle, and build a V1 prototype that can be tested against grounded questions.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page">
+    What Would I Do? Chatbot Build Guide · Team Leader Coaching Assistant
+  </footer>
+
+  <script>
+    const appendixToggle = document.getElementById('appendixToggle');
+    const appendixMenu = document.getElementById('appendixMenu');
+    const copyButton = document.getElementById('copyPrompt');
+    const promptText = document.getElementById('masterPromptText');
+
+    if (appendixToggle && appendixMenu) {
+      appendixToggle.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const isOpen = appendixMenu.classList.toggle('open');
+        appendixToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      appendixMenu.addEventListener('click', function (event) {
+        if (event.target.tagName === 'A') {
+          appendixMenu.classList.remove('open');
+          appendixToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        if (
+          !appendixToggle.contains(event.target) &&
+          !appendixMenu.contains(event.target)
+        ) {
+          appendixMenu.classList.remove('open');
+          appendixToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          appendixMenu.classList.remove('open');
+          appendixToggle.setAttribute('aria-expanded', 'false');
+          appendixToggle.focus();
+        }
+      });
+    }
+
+    if (copyButton && promptText) {
+      copyButton.addEventListener('click', async function () {
+        const originalText = copyButton.textContent;
+        const textToCopy = promptText.innerText;
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          copyButton.textContent = 'Copied!';
+        } catch (error) {
+          const range = document.createRange();
+          range.selectNodeContents(promptText);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          copyButton.textContent = 'Prompt selected';
+        }
+
+        setTimeout(function () {
+          copyButton.textContent = originalText;
+        }, 1600);
+      });
+    }
+  </script>
+</body>
+</html>
