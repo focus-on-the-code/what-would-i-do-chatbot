@@ -189,7 +189,8 @@
 
     nav::-webkit-scrollbar { display: none; }
 
-    nav a, .nav-button {
+    nav a,
+    .nav-button {
       white-space: nowrap;
       background: rgba(255,255,255,.72);
       border: 1px solid var(--line);
@@ -222,7 +223,7 @@
       position: absolute;
       top: calc(100% + 10px);
       right: 0;
-      width: min(300px, calc(100vw - 40px));
+      width: min(320px, calc(100vw - 40px));
       padding: 10px;
       background: rgba(255,255,255,.98);
       border: 1px solid var(--line);
@@ -309,9 +310,19 @@
 
     .card p { margin: 0; color: #475467; }
     .card p + p { margin-top: 10px; }
+
     a.card { display: block; }
-    .appendix-card { transition: transform .18s ease, box-shadow .18s ease; }
-    .appendix-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+    .appendix-card,
+    .phase-card {
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .appendix-card:hover,
+    .phase-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
 
     .pill {
       display: inline-flex;
@@ -375,10 +386,20 @@
       margin-bottom: 16px;
     }
 
-    .stage strong { display: block; color: var(--navy); font-size: 19px; margin-bottom: 8px; }
-    .stage span { color: var(--muted); font-size: 14px; }
+    .stage strong {
+      display: block;
+      color: var(--navy);
+      font-size: 19px;
+      margin-bottom: 8px;
+    }
 
-    .tool-list, .check-list {
+    .stage span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tool-list,
+    .check-list {
       list-style: none;
       padding: 0;
       margin: 0;
@@ -386,14 +407,16 @@
       gap: 10px;
     }
 
-    .tool-list li, .check-list li {
+    .tool-list li,
+    .check-list li {
       display: flex;
       gap: 10px;
       align-items: flex-start;
       color: #475467;
     }
 
-    .tool-list li::before, .check-list li::before {
+    .tool-list li::before,
+    .check-list li::before {
       content: "✓";
       flex: 0 0 23px;
       height: 23px;
@@ -405,6 +428,14 @@
       font-weight: 900;
       font-size: 13px;
       margin-top: 1px;
+    }
+
+    .x-list li::before {
+        content: "×";
+        background: #fdecec;
+        color: #b42318;
+        font-size: 18px;
+        line-height: 1;
     }
 
     .simple-steps {
@@ -448,6 +479,7 @@
       overflow: hidden;
       box-shadow: var(--shadow);
       border: 1px solid rgba(255,255,255,.08);
+      margin-top: 18px;
     }
 
     .prompt-header {
@@ -460,8 +492,23 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
+    .prompt-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: white;
+      font-weight: 800;
+    }
+
     .dots { display: flex; gap: 7px; }
-    .dots span { width: 12px; height: 12px; border-radius: 50%; background: #667085; }
+
+    .dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #667085;
+    }
+
     .dots span:nth-child(1) { background: #f97066; }
     .dots span:nth-child(2) { background: #fdb022; }
     .dots span:nth-child(3) { background: #32d583; }
@@ -521,7 +568,9 @@
       box-shadow: var(--shadow);
     }
 
-    .callout h2, .callout h3 { color: white; }
+    .callout h2,
+    .callout h3 { color: white; }
+
     .callout p { color: rgba(255,255,255,.82); }
 
     footer {
@@ -531,9 +580,23 @@
     }
 
     @media (max-width: 980px) {
-      .hero-grid, .grid.two, .grid.three, .grid.four, .grid.five, .mode-grid { grid-template-columns: 1fr; }
-      .timeline { grid-template-columns: repeat(5, 250px); }
-      .rubric-item { grid-template-columns: 1fr; }
+      .hero-grid,
+      .grid.two,
+      .grid.three,
+      .grid.four,
+      .grid.five,
+      .mode-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        grid-template-columns: repeat(5, 250px);
+      }
+
+      .rubric-item {
+        grid-template-columns: 1fr;
+      }
+
       .score { text-align: left; }
     }
 
@@ -598,32 +661,43 @@
         background: #fbfaf8;
       }
 
-      .simple-step { grid-template-columns: 1fr; }
+      .simple-step {
+        grid-template-columns: 1fr;
+      }
 
       .appendix-menu {
         left: 0;
         right: auto;
-        width: min(300px, calc(100vw - 24px));
+        width: min(320px, calc(100vw - 24px));
+      }
+
+      .prompt-header {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
   </style>
 </head>
+
 <body>
   <header class="hero page" id="top">
-    <div class="eyebrow"><span></span> Strategy · Roadmap · Master Prompt</div>
+    <div class="eyebrow"><span></span> Strategy · Three-Phase Build · Reusable Prompts</div>
+
     <div class="hero-grid">
       <div>
         <h1>What Would I Do? Chatbot</h1>
         <p>A practical build guide for a Team Leader-style coaching assistant that helps team members sharpen their thinking before important conversations, recommendations, and decisions.</p>
+
         <div class="cta-row">
-          <a class="button primary" href="#start">Start with V1</a>
-          <a class="button secondary" href="#prompt">Jump to Master Prompt</a>
+          <a class="button primary" href="#start">Start the Workflow</a>
+          <a class="button secondary" href="#prompts">Jump to Prompts</a>
         </div>
       </div>
+
       <aside class="hero-card">
         <h2>Answer Quality Standard</h2>
         <div class="quality-standard">
-          A good answer identifies the real issue, asks for missing context when needed, connects back to goals, gives a practical next step, and sounds like the Team Leader’s coaching style without pretending to be the Team Leader.
+          A good answer identifies the real issue, asks for missing context when needed, connects back to team or business goals, gives a practical next step, and sounds like the Team Leader’s coaching style without impersonating them.
         </div>
       </aside>
     </div>
@@ -633,19 +707,23 @@
     <nav class="page" aria-label="Page navigation">
       <a href="#summary">Summary</a>
       <a href="#is-not">What it is</a>
+      <a href="#phases">3-Phase Model</a>
+      <a href="#start">Get Started</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#tools">Tools</a>
-      <a href="#start">Get Started</a>
-      <a href="#prompt">Master Prompt</a>
+      <a href="#prompts">Prompts</a>
+
       <div class="nav-dropdown">
         <button class="nav-button" id="appendixToggle" type="button" aria-expanded="false" aria-controls="appendixMenu">Appendix ▾</button>
+
         <div class="appendix-menu" id="appendixMenu" aria-label="Appendix sections">
           <a href="#appendix">Appendix Overview</a>
-          <a href="#rules">A1 · Answer Quality</a>
-          <a href="#knowledge">A2 · Knowledge Base</a>
-          <a href="#truth">A3 · Source of Truth</a>
-          <a href="#pitfalls">A4 · Pitfalls</a>
-          <a href="#rubric">A5 · Rubric</a>
+          <a href="#phase-details">A1 · Phase Details</a>
+          <a href="#core-concepts">A2 · Core Concepts</a>
+          <a href="#transcript-rubric">A3 · Transcript Rubric</a>
+          <a href="#source-truth">A4 · Source of Truth</a>
+          <a href="#rubric">A5 · Evaluation Rubric</a>
+          <a href="#pitfalls">A6 · Pitfalls</a>
         </div>
       </div>
     </nav>
@@ -657,24 +735,27 @@
         <div>
           <div class="section-kicker">01 · Executive Summary</div>
           <h2>Build a coach and thought partner, not a replacement.</h2>
-          <p class="lead">The chatbot helps team members pressure-test thinking in a way that reflects a Team Leader’s known priorities, judgment, communication style, and business context.</p>
+          <p class="lead">This guide explains how to build a “What Would I Do?” chatbot: a coaching assistant that helps team members prepare for stronger conversations, recommendations, and decisions by reflecting a Team Leader’s known priorities, judgment, business context, and communication style.</p>
         </div>
       </div>
+
       <div class="grid three">
         <article class="card">
           <span class="pill blue">Purpose</span>
           <h3>Improve preparation</h3>
-          <p>Team members can ask questions they would normally bring to the Team Leader and get a useful first-pass coaching response.</p>
+          <p>Team members can pressure-test questions, ideas, and recommendations before bringing them to the Team Leader.</p>
         </article>
+
         <article class="card">
           <span class="pill teal">Approach</span>
-          <h3>Start simple</h3>
-          <p>Begin with a manual Claude-based prototype using curated documents, transcripts, examples, and a focused test set.</p>
+          <h3>Use three focused phases</h3>
+          <p>Scope the project, discover the source material, then build and test a small Claude-based V1.</p>
         </article>
+
         <article class="card">
           <span class="pill gold">Outcome</span>
-          <h3>Prove answer quality</h3>
-          <p>Only move toward a pilot, Slack deployment, or maintained system after the V1 answers are useful, grounded, and appropriately bounded.</p>
+          <h3>Prove V1 before scaling</h3>
+          <p>Only move toward Slack, APIs, databases, or automation after the V1 prototype produces useful, grounded answers.</p>
         </article>
       </div>
     </section>
@@ -683,27 +764,33 @@
       <div class="section-kicker">02 · What This Bot Is — and Is Not</div>
       <h2>A decision-prep simulator with clear boundaries.</h2>
       <p class="lead">The bot should help people think more clearly. It should not impersonate the Team Leader, invent missing context, or approve decisions.</p>
+
       <div class="compare" style="margin-top:18px;">
         <div class="row">
           <div class="cell head">It Is</div>
           <div class="cell head">It Is Not</div>
         </div>
+
         <div class="row">
           <div class="cell">A coach and thought partner</div>
           <div class="cell">A decision maker</div>
         </div>
+
         <div class="row">
           <div class="cell">A way to pressure-test thinking before a conversation</div>
           <div class="cell">A substitute for a real conversation when judgment is required</div>
         </div>
+
         <div class="row">
-          <div class="cell">A guide reflecting known priorities, tone, and reasoning patterns</div>
+          <div class="cell">A guide that reflects known priorities, tone, and reasoning patterns</div>
           <div class="cell">An impersonation of the Team Leader</div>
         </div>
+
         <div class="row">
-          <div class="cell">A knowledge-and-judgment layer built from transcripts and documents</div>
+          <div class="cell">A knowledge-and-judgment layer built from transcripts and business documents</div>
           <div class="cell">A magic answer machine that invents missing facts</div>
         </div>
+
         <div class="row">
           <div class="cell">A tool for surfacing gaps, tradeoffs, and next steps</div>
           <div class="cell">An approval workflow for budgets, hiring, strategy, or client commitments</div>
@@ -713,217 +800,764 @@
 
     <section id="origin">
       <div class="section-kicker">03 · How the Idea Was Conceived</div>
-      <h2>Three paths became one practical build plan.</h2>
+      <h2>From one master prompt to a three-phase build process.</h2>
+
       <div class="grid three" style="margin-top:18px;">
         <article class="card">
           <h3>Start from scratch</h3>
-          <p>Use an LLM to define goals, ask discovery questions, identify source materials, and build a plan.</p>
+          <p>Work with an LLM to define goals, ask discovery questions, identify source materials, and build a plan.</p>
         </article>
+
         <article class="card">
           <h3>Start from transcripts</h3>
-          <p>Use speaker-identified transcripts to extract answers, feedback, reasoning, and coaching style.</p>
+          <p>Use speaker-identified transcripts to extract the Team Leader’s reasoning, answers, feedback, and coaching style.</p>
         </article>
+
         <article class="card">
           <h3>Simple path</h3>
-          <p>Analyze transcripts first, summarize what matters, then design the chatbot from that analysis.</p>
+          <p>Start quickly with a small source bundle, let Claude guide discovery, then test a manual V1 before broader rollout.</p>
         </article>
       </div>
+
       <div class="callout" style="margin-top:18px;">
         <h3>Current recommendation</h3>
-        <p>Start quickly, let Claude guide discovery, organize source material into facts and judgment, build a manual V1, and test it before deploying more broadly.</p>
+        <p>The strongest structure is three separate work sessions: scoping, discovery, and tactical V1 build. Each phase has one job and creates a clear handoff to the next phase.</p>
       </div>
     </section>
 
-    <section id="roadmap">
-      <div class="section-kicker">04 · Build Roadmap</div>
-      <h2>V1 through V4: prove value before adding complexity.</h2>
-      <p class="lead">Each phase should earn the right to exist. Do not jump to Slack or automation until the prototype reliably produces useful, grounded coaching.</p>
-      <div class="timeline" style="margin-top:20px;">
-        <article class="stage">
-          <div class="stage-number">V1</div>
-          <strong>Manual Prototype</strong>
-          <span>Claude Project or comparable chatbot with curated docs, strong instructions, and a small test set.</span>
-        </article>
-        <article class="stage">
-          <div class="stage-number">1.5</div>
-          <strong>Pre-launch Hardening</strong>
-          <span>Add feedback, source cleanup, privacy review, and answer-quality scoring.</span>
-        </article>
-        <article class="stage">
-          <div class="stage-number">V2</div>
-          <strong>Controlled Pilot</strong>
-          <span>Limited team access with clear usage expectations and ongoing refinement.</span>
-        </article>
-        <article class="stage">
-          <div class="stage-number">V3</div>
-          <strong>Slack Deployment</strong>
-          <span>Bring the bot into the team workflow with source control, guardrails, and privacy protections.</span>
-        </article>
-        <article class="stage">
-          <div class="stage-number">V4</div>
-          <strong>Maintained System</strong>
-          <span>Ongoing ingestion, governance, analytics, versioning, and ownership.</span>
-        </article>
-      </div>
-    </section>
+    <section id="phases">
+      <div class="section-kicker">04 · The Three-Phase Build Model</div>
+      <h2>Three chats. Three jobs. One clear handoff.</h2>
+      <p class="lead">The build is best organized as three separate chats or work sessions, ideally inside the same Claude Project.</p>
 
-    <section id="tools">
-      <div class="section-kicker">05 · Recommended Tools</div>
-      <h2>Claude first. Custom infrastructure later.</h2>
-      <div class="grid two" style="margin-top:18px;">
-        <article class="card">
-          <h3>Best tools for V1</h3>
-          <ul class="tool-list">
-            <li><strong>Claude Projects:</strong>&nbsp;best starting point for curated docs, custom instructions, and iterative testing.</li>
-            <li><strong>Claude chat:</strong>&nbsp;useful for source review, transcript analysis, prompt iteration, and test-question generation.</li>
-            <li><strong>Document repository:</strong>&nbsp;a controlled place for approved docs, transcripts, and prompt versions.</li>
-          </ul>
+      <div class="grid three" style="margin-top:20px;">
+        <article class="card phase-card">
+          <span class="pill blue">Phase 1</span>
+          <h3>Scoping</h3>
+          <p><strong>Primary question:</strong> What are we building, for whom, and what does V1 need to prove?</p>
+          <p><strong>Main work:</strong> Define project, end state, V1 scope, non-goals, success criteria, and V1.5–V4 roadmap.</p>
+          <p><strong>Output:</strong> Project Scope Brief.</p>
         </article>
-        <article class="card">
-          <h3>Tools for later versions</h3>
-          <ul class="tool-list">
-            <li><strong>Claude Code:</strong>&nbsp;helpful for scripted cleanup, transcript parsing, evaluation, and implementation.</li>
-            <li><strong>Anthropic API:</strong>&nbsp;likely needed for Slack deployment or a custom interface.</li>
-            <li><strong>Retrieval layer:</strong>&nbsp;optional for V3/V4 if the source library becomes large or permission-aware retrieval is needed.</li>
-          </ul>
+
+        <article class="card phase-card">
+          <span class="pill teal">Phase 2</span>
+          <h3>Discovery</h3>
+          <p><strong>Primary question:</strong> What source material should power the bot, and what does it tell us?</p>
+          <p><strong>Main work:</strong> Review documents and transcripts, classify facts vs. judgment, rank transcripts, identify guardrails, gaps, and source hierarchy.</p>
+          <p><strong>Output:</strong> Discovery Assessment.</p>
+        </article>
+
+        <article class="card phase-card">
+          <span class="pill gold">Phase 3</span>
+          <h3>Tactical V1 Build</h3>
+          <p><strong>Primary question:</strong> How do we turn the scope and discovery into a working Claude prototype?</p>
+          <p><strong>Main work:</strong> Finalize source bundle, organize project knowledge, draft instructions, create verified test questions, and build the V1 testing process.</p>
+          <p><strong>Output:</strong> Tactical V1 Build Package.</p>
         </article>
       </div>
     </section>
 
     <section id="start">
-      <div class="section-kicker">06 · Get Started</div>
-      <h2>Lower the bar: start with the prompt, not a perfect knowledge base.</h2>
-      <p class="lead">The user does not need a large pre-work project. The user and Claude should discover, classify, prioritize, and improve the source materials together.</p>
+      <div class="section-kicker">05 · Getting Started</div>
+      <h2>Start with the workflow, not a perfect knowledge base.</h2>
+      <p class="lead">The immediate move is not to build the whole system. It is to define scope, assess the best source material, build a small Claude-based V1, and verify answer quality.</p>
+
       <div class="simple-steps" style="margin-top:20px;">
         <div class="simple-step">
           <div>
-            <h3>Paste the master prompt into Claude.</h3>
-            <p>Let Claude summarize the project and ask the first high-leverage discovery question.</p>
+            <h3>Create or use a Claude Project.</h3>
+            <p>Use it as the workspace for the three chats, uploaded documents, source review, and V1 prototype.</p>
           </div>
         </div>
+
         <div class="simple-step">
           <div>
-            <h3>Answer with what you know.</h3>
-            <p>Do not assemble a perfect knowledge base first. Use the questions to find the right materials.</p>
+            <h3>Run Phase 1 in a first chat.</h3>
+            <p>Use the Scoping Prompt to define the project, V1 scope, non-goals, success criteria, and roadmap.</p>
           </div>
         </div>
+
         <div class="simple-step">
           <div>
-            <h3>Gather a starter source bundle.</h3>
-            <p>Use a few relevant transcripts, one or two current strategy or operating docs, and examples of strong feedback or decision-making.</p>
+            <h3>Upload or gather a starter source bundle.</h3>
+            <p>Use a few relevant transcripts, current strategy or operating docs, and examples of strong feedback or decision-making.</p>
           </div>
         </div>
+
         <div class="simple-step">
           <div>
-            <h3>Have Claude classify the sources.</h3>
-            <p>Sort materials into facts, judgment, answer examples, guardrails, source-of-truth rules, and gaps.</p>
+            <h3>Run Phase 2 in a second chat.</h3>
+            <p>Use the Discovery Prompt to assess documents and transcripts, classify facts vs. judgment, and identify the best V1 source bundle.</p>
           </div>
         </div>
+
         <div class="simple-step">
           <div>
-            <h3>Build and test a simple V1.</h3>
-            <p>Create a Claude Project, add the starter sources, generate 10–20 grounded test questions, review failures, and revise.</p>
+            <h3>Run Phase 3 in a third chat.</h3>
+            <p>Use the Tactical V1 Build Prompt to assemble the Claude prototype, instructions, source bundle, and test plan.</p>
+          </div>
+        </div>
+
+        <div class="simple-step">
+          <div>
+            <h3>Test V1 honestly before scaling.</h3>
+            <p>Do not add Slack, APIs, databases, or automation until the simple prototype proves it can produce useful, grounded coaching responses.</p>
           </div>
         </div>
       </div>
+
+      <div class="callout" style="margin-top:20px;">
+        <h3>Important note</h3>
+        <p>If you stop at V1 — a shared Claude Project with custom instructions that responds to your team’s questions in your style — you may see all the value you need. V1.5–V4 increase durability, flexibility, and scalability, but they are not required to prove the concept.</p>
+      </div>
     </section>
 
-    <section id="prompt">
-      <div class="section-kicker">07 · Master Prompt</div>
-      <h2>Paste this into Claude to begin discovery and V1 planning.</h2>
-      <p class="lead">This prompt drives the LLM to think through V1–V4, ask high-leverage questions, discover relevant source material, and produce a practical build plan.</p>
-      <div class="prompt-box" style="margin-top:20px;">
+    <section id="roadmap">
+      <div class="section-kicker">06 · Build Roadmap</div>
+      <h2>V1 through V4: scale only after the prototype works.</h2>
+      <p class="lead">The roadmap shows how the system can mature after V1, but each stage should earn the right to exist.</p>
+
+      <div class="timeline" style="margin-top:20px;">
+        <article class="stage">
+          <div class="stage-number">V1</div>
+          <strong>Manual Prototype</strong>
+          <span>Claude Project with curated docs, strong instructions, and a small test set.</span>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">1.5</div>
+          <strong>Pre-launch Hardening</strong>
+          <span>Feedback loop, source cleanup, privacy review, and answer-quality scoring.</span>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">V2</div>
+          <strong>Controlled Pilot</strong>
+          <span>Limited team access with clear usage expectations and ongoing refinement.</span>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">V3</div>
+          <strong>Slack Deployment</strong>
+          <span>Slack bot connected to approved knowledge base using Anthropic API or orchestration layer.</span>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">V4</div>
+          <strong>Maintained System</strong>
+          <span>Regular ingestion, review, governance, analytics, ownership, and version management.</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="tools">
+      <div class="section-kicker">07 · Recommended Tools</div>
+      <h2>Claude first. Custom infrastructure later.</h2>
+
+      <div class="grid two" style="margin-top:18px;">
+        <article class="card">
+          <h3>Best tools for V1</h3>
+          <ul class="tool-list">
+            <li><strong>Claude Projects:</strong>&nbsp;best starting point because they allow curated project knowledge, custom instructions, and iterative testing without heavy engineering.</li>
+            <li><strong>Claude chat:</strong>&nbsp;useful for scoping, source review, transcript analysis, prompt iteration, and test-question generation.</li>
+            <li><strong>Document repository:</strong>&nbsp;controlled location for approved source-of-truth documents, transcripts, examples, and prompt versions.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Tools for later versions</h3>
+          <ul class="tool-list">
+            <li><strong>Claude Code:</strong>&nbsp;useful later for scripted cleanup, transcript parsing, evaluation scripts, or Slack/API implementation.</li>
+            <li><strong>Anthropic API:</strong>&nbsp;likely needed for V3 Slack deployment or a custom internal interface.</li>
+            <li><strong>Retrieval layer/vector database:</strong>&nbsp;unnecessary for V1, potentially useful for V3/V4 if the source library becomes large or permission-aware retrieval is required.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="prompts">
+      <div class="section-kicker">08 · Three Reusable Phase Prompts</div>
+      <h2>Use these prompts in sequence.</h2>
+      <p class="lead">Each prompt has one focused job: scope, discover, or build. Run them as three separate chats or sessions inside the same Claude Project.</p>
+
+      <div class="prompt-box">
         <div class="prompt-header">
-          <div class="dots"><span></span><span></span><span></span></div>
-          <button class="copy-button" id="copyPrompt" type="button">Copy / Paste Prompt</button>
+          <div class="prompt-title">
+            <div class="dots"><span></span><span></span><span></span></div>
+            Prompt 1 · Phase 1 Scoping
+          </div>
+          <button class="copy-button" type="button" data-copy-target="phase1Prompt">Copy Phase 1 Prompt</button>
         </div>
-        <pre id="masterPromptText">You are helping me design and build a "What Would I Do?" chatbot for a team.
 
-The purpose of this chatbot is to help team members prepare for better conversations, recommendations, and decisions by giving them a coaching-style response that reflects the Team Leader's known priorities, reasoning patterns, judgment, business context, and communication style. The chatbot is a coach and thought partner. It is not a decision maker, not a replacement for the Team Leader, and should not pretend to be the Team Leader.
+        <pre id="phase1Prompt">You are helping me scope a “What Would I Do?” chatbot for a team.
 
-Our answer-quality standard is:
-A good answer should identify the real issue, ask for missing context where needed, connect back to our goals, give a practical next step, and sound like the Team Leader's coaching style without pretending to be the Team Leader.
+The goal is to create a chatbot that helps team members prepare for better conversations, recommendations, and decisions by giving coaching-style responses that reflect a Team Leader’s known priorities, judgment, reasoning patterns, business context, and communication style.
 
-The first version should be a manual/simple prototype that a non-technical person can build and test using Claude/Anthropic tools. The larger roadmap should cover:
-V1 - manual/simple prototype
-V1.5 - pre-launch hardening and feedback loop
-V2 - team-facing controlled pilot
-V3 - Slack deployment
-V4 - maintained internal coaching system
+The chatbot should act as a coach and thought partner. It should not be a decision maker, should not replace the Team Leader, and should not pretend to be the Team Leader.
 
-Your job is to help me build the strategy and plan, then get us started on V1 by discovering and organizing the source materials needed for the knowledge base. I do not want to do a large amount of pre-work before starting. Use your questions to help me discover, collect, classify, and prioritize the materials with you.
+A good answer from the eventual chatbot should:
+- identify the real issue behind the question,
+- ask for missing context when needed,
+- connect the issue back to team or business goals,
+- give a practical next step,
+- and sound like the Team Leader’s coaching style without impersonating them.
 
-Initial guardrails:
-- Do not make final decisions on the Team Leader's behalf.
-- Do not approve budgets, hiring, strategy shifts, client commitments, roadmap changes, or personnel decisions.
-- Do not present the bot as the Team Leader.
-- Do not invent company context if the source material does not support the answer.
-- Do not answer sensitive HR, legal, financial, compensation, or confidential questions as if the bot has authority.
+We are not building the chatbot yet. This is Phase 1: Scoping.
+
+Your job in this phase is to help me define the project, clarify the end state, define a practical V1, and map a simple V1.5–V4 roadmap.
+
+Work with me conversationally. Start by summarizing what you understand we are trying to build and why it matters. Then ask me one high-leverage question at a time.
+
+Do not ask me for all details at once. After each answer I give, briefly summarize:
+1. what you understood,
+2. why it matters,
+3. how it affects the scope,
+4. and what question you need to ask next.
+
+Focus your questions on:
+- who will use the chatbot,
+- what kinds of questions they should ask it,
+- what decisions or topics it should not handle,
+- what “good” would look like in V1,
+- what business or team goals it should support,
+- what level of confidence or authority it should avoid,
+- what should be deferred until later versions,
+- and what source materials will likely be needed in Phase 2.
+
+Do not get deeply into document review yet. Do not try to select transcripts yet. Do not build final chatbot instructions yet. Those come later.
+
+At the end of this phase, when you have enough information, produce a Project Scope Brief with these sections:
+
+1. Project Definition
+Explain what the chatbot is and why it exists.
+
+2. Intended Users
+Describe who the chatbot is for and how they are expected to use it.
+
+3. Primary Use Cases
+List the main kinds of questions or situations V1 should support.
+
+4. V1 Scope
+Define the simplest useful first version.
+
+5. V1 Non-Goals
+Define what V1 should not do.
+
+6. Answer-Quality Standard
+State what a good chatbot answer should include.
+
+7. Initial Guardrails
+List starting boundaries, including that the bot should not make decisions, approve commitments, impersonate the Team Leader, or give false confidence when evidence is weak.
+
+8. Success Criteria
+Define how we will know V1 is worth continuing.
+
+9. V1.5–V4 Roadmap
+Provide a simple roadmap:
+- V1: manual/simple prototype
+- V1.5: pre-launch hardening and feedback loop
+- V2: team-facing controlled pilot
+- V3: Slack or workflow deployment
+- V4: maintained internal coaching system
+
+10. Phase 2 Discovery Checklist
+List the types of documents, transcripts, examples, and context we should review in the next phase.
+
+Keep this practical for someone without a technical background. Favor the simplest useful path over a complex system design.</pre>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <div class="prompt-title">
+            <div class="dots"><span></span><span></span><span></span></div>
+            Prompt 2 · Phase 2 Discovery
+          </div>
+          <button class="copy-button" type="button" data-copy-target="phase2Prompt">Copy Phase 2 Prompt</button>
+        </div>
+
+        <pre id="phase2Prompt">You are helping me build a “What Would I Do?” chatbot for a team.
+
+We have completed Phase 1: Scoping. The project goal is to create a chatbot that helps team members prepare for better conversations, recommendations, and decisions by giving coaching-style responses that reflect a Team Leader’s known priorities, judgment, reasoning patterns, business context, and communication style.
+
+The chatbot is a coach and thought partner. It is not a decision maker, not a replacement for the Team Leader, and should not pretend to be the Team Leader.
+
+This is Phase 2: Discovery.
+
+Your job in this phase is to review and assess the available source materials so we can decide what should power the V1 chatbot.
+
+Do not build the chatbot yet. Do not write final chatbot instructions yet. Do not create the final test set yet. Those come in Phase 3.
+
+Use the Phase 1 Project Scope Brief as the target for this discovery work. If I have not provided the Phase 1 brief yet, ask me to paste it before continuing.
+
+I will provide or upload source materials such as:
+- meeting transcripts,
+- strategy documents,
+- operating documents,
+- product or project documents,
+- customer context,
+- decision notes,
+- feedback examples,
+- team communications,
+- and other business context.
+
+Your job is to help me inspect, classify, score, and prioritize these materials.
+
+Work conversationally. Start by asking me what source materials are available or by reviewing the materials already uploaded. If more information is needed, ask one question at a time.
+
+After each answer I give, briefly summarize:
+1. what you understood,
+2. why it matters,
+3. how it affects the source-material plan,
+4. and what you need to ask or review next.
+
+Discovery goals:
+
+1. Source Inventory
+Create an inventory of available source materials. For each source, identify:
+- source name or description,
+- source type,
+- likely usefulness,
+- whether it supports facts, judgment, answer examples, guardrails, or testing,
+- and any obvious sensitivity concerns.
+
+2. Business and Team Context
+Identify the best materials for factual context, including:
+- company goals,
+- team goals,
+- product or service context,
+- customer context,
+- project priorities,
+- operating principles,
+- delivery expectations,
+- current strategy,
+- and any important constraints.
+
+3. Team Leader Judgment and Style
+Identify the best materials for judgment and coaching style, including:
+- how the Team Leader thinks through problems,
+- how they evaluate tradeoffs,
+- how they define quality,
+- how they push back,
+- how they give feedback,
+- how they coach,
+- how they communicate expectations,
+- how they handle incomplete information,
+- and what patterns repeatedly show up.
+
+4. Transcript Assessment
+Do not simply ask me for “the best transcripts.” Help me create or review a transcript inventory and score candidate transcripts.
+
+For each transcript, assess:
+- whether speakers are identified,
+- whether the Team Leader’s comments are easy to isolate,
+- whether it includes useful coaching, feedback, decision reasoning, prioritization, or tradeoff analysis,
+- whether it includes current business context,
+- whether it reflects reusable judgment patterns rather than one-off comments,
+- whether it is recent enough to rely on,
+- whether it contains sensitive material that should be excluded, redacted, or handled carefully,
+- and whether it supports the V1 use cases from the Phase 1 scope.
+
+Score each transcript as:
+- High value for V1,
+- Medium value for V1,
+- Low value for V1,
+- Exclude from V1,
+- or Needs review/redaction.
+
+5. Facts vs. Judgment Classification
+Classify the useful source material into:
+- Facts: company, team, product, customer, project, strategy, operating, and delivery context.
+- Judgment: how the Team Leader thinks, coaches, evaluates tradeoffs, pushes back, defines quality, processes information, and gives feedback.
+- Answer examples: specific examples of strong responses or coaching moments the bot should learn from.
+- Guardrails: topics, risks, privacy issues, or sensitive areas the bot should avoid or handle carefully.
+- Gaps: missing information needed to make V1 useful.
+
+6. Source-of-Truth Hierarchy
+Recommend a source-of-truth hierarchy for V1. When sources conflict, explain which sources should carry more weight and why. Do not silently resolve important conflicts. Surface them.
+
+Use this starting hierarchy unless the source materials suggest a better one:
+1. Current strategy, operating principles, and formal company direction.
+2. Current product, project, customer, and roadmap documents.
+3. Recent meeting transcripts with speaker identification, especially the Team Leader’s answers and feedback.
+4. Older transcripts and historic context.
+5. Inferred coaching style, reasoning patterns, and tone guidance derived from examples.
+
+7. Guardrails and Sensitivity Review
+Identify any additional do-nots or guardrails suggested by the source material. Pay special attention to:
+- HR or personnel topics,
+- legal or financial issues,
+- compensation,
+- client commitments,
+- confidential strategy,
+- sensitive customer information,
+- performance feedback,
+- role-based access concerns,
+- and places where the bot might overstate confidence.
+
+8. Missing Materials
+Identify what is missing for V1. Be practical. Do not ask for a perfect knowledge base. Separate missing materials into:
+- required for V1,
+- useful but optional for V1,
+- safe to defer to V1.5 or later.
+
+9. Recommended V1 Source Bundle
+Recommend the smallest useful source bundle for V1. Include:
+- must-have documents,
+- best transcripts,
+- answer-example candidates,
+- any sources that need cleanup or redaction,
+- and sources to exclude for now.
+
+At the end of Phase 2, produce a Discovery Assessment with these sections:
+
+1. Summary of What Was Reviewed
+2. Recommended V1 Source Bundle
+3. Source Inventory
+4. Transcript Ranking
+5. Facts Map
+6. Judgment and Coaching Style Map
+7. Answer Example Candidates
+8. Guardrails and Sensitivity Notes
+9. Source-of-Truth Hierarchy
+10. Missing Materials
+11. Open Questions Before Build
+12. Handoff Notes for Phase 3
+
+Keep this practical for someone without a technical background. Your goal is to help us choose and organize the right source materials for V1, not to design a complex technical system.</pre>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <div class="prompt-title">
+            <div class="dots"><span></span><span></span><span></span></div>
+            Prompt 3 · Phase 3 Tactical V1 Build
+          </div>
+          <button class="copy-button" type="button" data-copy-target="phase3Prompt">Copy Phase 3 Prompt</button>
+        </div>
+
+        <pre id="phase3Prompt">You are helping me build V1 of a “What Would I Do?” chatbot for a team.
+
+We have completed two earlier phases:
+
+Phase 1: Scoping
+This defined the project, intended users, V1 scope, non-goals, success criteria, and V1.5–V4 roadmap.
+
+Phase 2: Discovery
+This reviewed available source materials, identified useful documents and transcripts, separated facts from judgment, recommended a V1 source bundle, identified guardrails, and produced a source-of-truth hierarchy.
+
+This is Phase 3: Tactical V1 Build.
+
+Your job is to help me turn the Phase 1 and Phase 2 outputs into a working V1 chatbot prototype using Claude.
+
+The chatbot should help team members prepare for better conversations, recommendations, and decisions by giving coaching-style responses that reflect the Team Leader’s known priorities, judgment, reasoning patterns, business context, and communication style.
+
+The chatbot is a coach and thought partner. It is not a decision maker, not a replacement for the Team Leader, and should not pretend to be the Team Leader.
+
+A good answer from the chatbot should:
+- identify the real issue behind the question,
+- ask for missing context when needed,
+- connect the issue back to team or business goals,
+- give a practical next step,
+- and sound like the Team Leader’s coaching style without impersonating them.
+
+Before building, ask me to provide or paste:
+1. the Phase 1 Project Scope Brief,
+2. the Phase 2 Discovery Assessment,
+3. the recommended V1 source bundle or list of source documents,
+4. any known constraints about Claude Projects, document access, privacy, or team usage.
+
+If any of these are missing, help me proceed with the best available information, but clearly identify what is missing and what risk that creates.
+
+Your job in this phase is to produce practical build materials, not more abstract planning.
+
+Work conversationally. Ask one question at a time only when needed. Prefer making reasonable, clearly labeled recommendations over asking unnecessary questions.
+
+Build tasks:
+
+1. Confirm V1 Scope
+
+Briefly restate:
+- what V1 will do,
+- who it is for,
+- what it will not do,
+- what success looks like,
+- and what should be deferred to V1.5 or later.
+
+Use the Phase 1 Project Scope Brief as the main source for this section.
+
+2. Finalize the V1 Source Bundle
+
+Review the recommended source bundle from Phase 2 and produce a final upload checklist.
+
+Include:
+- must-have documents,
+- useful optional documents,
+- transcripts to include,
+- transcripts to exclude,
+- sources that need cleanup or redaction,
+- sources that should be excluded from V1,
+- and any missing materials that should not block V1.
+
+Keep the source bundle as small as possible while still making V1 useful and testable.
+
+3. Prepare Source Organization
+
+Recommend a simple document organization method for Claude Project knowledge.
+
+Use categories such as:
+- 00_Project_Scope
+- 01_Current_Strategy_and_Context
+- 02_Product_Project_Customer_Context
+- 03_Team_Operating_Context
+- 04_Team_Leader_Judgment_and_Coaching
+- 05_Transcript_Excerpts
+- 06_Answer_Examples
+- 07_Guardrails_and_Do_Nots
+- 08_Test_Set
+
+Keep this simple. Do not recommend complex databases, embeddings, APIs, or Slack integration for V1 unless absolutely necessary.
+
+4. Define Confidence Modes
+
+Define the confidence modes the V1 chatbot should use before answering.
+
+Include these four response modes:
+
+Strong-context answer:
+Use when current, relevant source material clearly supports the response and there is no obvious conflict. The bot may give direct guidance, while making clear that the answer is based on available context and is not a final decision.
+
+Partial-context answer:
+Use when some relevant context exists but important details are missing. The bot should state what is known, name what is missing, frame the issue, and suggest a practical next step.
+
+Insufficient-context answer:
+Use when the source material does not support a confident answer. The bot should say there is not enough evidence to answer directly, then help the user clarify the question or prepare the issue.
+
+Conflicting-context answer:
+Use when sources point in different directions. The bot should name the conflict, identify which source appears more current or reliable, and frame the tradeoff without pretending the issue is settled.
+
+The bot should always match confidence to evidence and should not give false confidence when evidence is weak.
+
+5. Define Decision-Boundary Rules
+
+Decision-boundary rules define the bot’s role and authority. They keep the bot acting as a coach and thought partner, not as the Team Leader or as an approval authority.
+
+The chatbot may:
+- help frame decisions,
+- identify tradeoffs,
+- clarify missing context,
+- connect issues to team or business goals,
+- suggest practical next steps,
+- pressure-test assumptions,
+- help users prepare stronger recommendations,
+- and explain what a stronger decision conversation should include.
+
+The chatbot must not:
+- make final decisions,
+- approve or reject decisions,
+- approve budgets, hiring, compensation, client commitments, roadmap changes, strategy shifts, or personnel decisions,
+- speak as the Team Leader,
+- write in first person as if it is the Team Leader,
+- imply the Team Leader approved, decided, or endorsed something unless the source material explicitly says so,
+- or treat coaching output as authority.
+
+When a question asks for a decision, approval, or commitment, the bot should reframe its answer as decision preparation. It should say what needs to be clarified, what tradeoffs matter, and what a strong recommendation should include.
+
+6. Define Guardrails and Do-Nots
+
+Guardrails and do-nots define the bot’s risk, source-use, privacy, and quality limits. They prevent the bot from mishandling sensitive, unsupported, outdated, private, or risky information.
+
+Create a clear Guardrails and Do-Nots section for the V1 chatbot instructions.
+
+Avoid duplicating the decision-boundary rules. Decision-boundary rules are about the bot’s authority. Guardrails and do-nots are about safe, accurate, private, and appropriate use of the knowledge base.
+
+Start with these baseline do-nots:
+
+Source and grounding rules:
+- Do not invent company, team, customer, product, project, strategy, or operating context if the source material does not support it.
 - Do not give false confidence when evidence is weak.
 - Do not treat casual transcript comments as formal policy unless confirmed by current source-of-truth documents.
-- Do not quote or reveal sensitive transcript details unless doing so is appropriate for the intended audience.
+- Do not rely on outdated sources without clearly saying the context may be outdated.
+- Do not silently resolve important conflicts between sources. Surface the conflict and explain what would need to be clarified.
+- Do not use excluded sources or sources marked as requiring review/redaction.
 
-As part of your work, assess the selected source materials and recommend additional guardrails based on content, privacy risks, sensitivity, role access issues, or conflict between sources.
+Privacy and sensitivity rules:
+- Do not quote or reveal sensitive transcript details unless those details are appropriate for the intended audience.
+- Do not expose private personnel feedback, confidential client context, restricted business information, compensation details, or sensitive performance-related content.
+- Do not answer sensitive HR, legal, financial, compensation, performance, or confidential questions as if the chatbot has authority or complete context.
+- Do not turn private or situational comments from transcripts into general guidance unless they are supported by approved source material.
 
-Confidence and decision-boundary rules:
-Before answering any user question, assess whether the available context supports a strong-context, partial-context, insufficient-context, or conflicting-context response.
+Topic and usage limits:
+- Do not provide authoritative guidance on topics that Phase 2 marked as excluded, sensitive, outdated, or outside V1 scope.
+- Do not expand beyond the V1 use cases unless clearly labeled as general thinking support rather than grounded Team Leader-style guidance.
+- Do not present unsupported speculation as Team Leader judgment.
 
-Strong-context answer: Use when relevant, current source material clearly supports the response and there is no obvious conflict. Give direct guidance while making clear it is based on available context and consistent with the Team Leader's prior guidance. Do not say the Team Leader would definitely say something.
+Then review the Phase 2 Discovery Assessment and add any source-specific do-nots based on:
+- sensitive topics found in the materials,
+- excluded documents or transcripts,
+- role-access concerns,
+- privacy risks,
+- conflicting sources,
+- outdated guidance,
+- customer or client confidentiality,
+- personnel or performance content,
+- legal, financial, or compliance sensitivity,
+- and areas where the chatbot is likely to overstate confidence.
 
-Partial-context answer: Use when there is some relevant context but not enough for a definitive answer. State what is known, identify what is missing, frame the issue, and give a practical next step.
+Separate the final guardrails into these categories:
+1. Source and grounding rules
+2. Privacy and sensitivity rules
+3. Topic exclusions
+4. Source-use restrictions
+5. Confidence and uncertainty rules
 
-Insufficient-context answer: Use when the source material does not support the answer or the bot would need to invent company context. Say that there is not enough evidence to answer confidently, then help the user clarify the question or prepare the issue.
+For each guardrail, briefly explain why it matters and how the chatbot should behave instead.
 
-Conflicting-context answer: Use when sources point in different directions. Name the conflict, identify which source appears more current or reliable, and frame the tradeoff without pretending the issue is settled.
+7. Define Source-of-Truth Behavior
 
-Decision-boundary rules:
-- The bot can help frame decisions; it should not make decisions.
-- The bot can recommend next steps; it should not issue approvals.
-- The bot should not impersonate the Team Leader.
-- The bot must separate coaching from authority.
-- The bot should preserve uncertainty.
-- When it cannot answer directly, it should still help the user think through the issue.
+Using the Phase 2 Discovery Assessment, define how the chatbot should decide which sources to rely on.
 
-The knowledge base should be organized into at least two major categories:
-1. Facts: company, team, product, customer, project, strategy, operating, and delivery context.
-2. Judgment: how the Team Leader thinks, coaches, evaluates tradeoffs, pushes back, defines quality, processes information, and gives feedback.
+Include:
+- which sources should carry the most weight,
+- how current formal documents should be treated compared with older transcripts,
+- how recent transcripts should be used,
+- how inferred coaching patterns should be used,
+- and how the bot should behave when sources conflict.
 
-Also identify answer examples, guardrails, source-of-truth rules, and any missing information needed for V1.
+Use this starting hierarchy unless Phase 2 suggests a better one:
+1. Current strategy, operating principles, and formal company direction.
+2. Current product, project, customer, and roadmap documents.
+3. Recent meeting transcripts with speaker identification, especially the Team Leader’s answers and feedback.
+4. Older transcripts and historic context.
+5. Inferred coaching style, reasoning patterns, and tone guidance derived from examples.
 
-How we will work:
-1. First, summarize in your own words what we are building, why it matters, the expected outcome, and what success looks like.
-2. Then provide a concise V1-V4 build roadmap.
-3. Then ask me five high-leverage discovery questions, one at a time, to identify the best source materials and context for V1.
-4. With each question, briefly explain why the question matters and how you will use the answer.
-5. After each answer I give, summarize what you understood and how it changes your thinking about the plan.
-6. After the fifth answer, produce a detailed V1 build plan and a higher-level V1-V4 roadmap.
+The bot should not silently resolve major conflicts. It should surface the conflict and explain what would need to be clarified.
 
-Your discovery questions should help identify:
-- the best transcripts and whether speakers are identified
-- the most important current business, product, strategy, and team documents
-- examples of the Team Leader's coaching, feedback, and decision-making style
-- which topics should be included or excluded from V1
-- privacy, sensitivity, and access concerns
-- facts vs judgment sources
-- source-of-truth hierarchy
-- initial test questions with verifiable answers
-- any missing materials needed to make V1 useful
+8. Draft V1 Chatbot Instructions
 
-The V1 plan you produce should include:
-- recommended Claude/Anthropic setup
-- source material checklist
-- source cleanup and organization process
-- facts vs judgment organization
-- source-of-truth hierarchy
-- proposed guardrails and do-nots
-- confidence and decision-boundary rules
-- draft V1 system prompt structure
-- 10-20 test question categories and instructions for generating verifiable test questions
-- evaluation rubric
-- step-by-step build instructions
-- what to defer to V1.5, V2, V3, and V4
+Now synthesize the prior sections into a clean set of V1 chatbot instructions.
 
-Keep the plan practical for someone without a deep technical background. Prefer the simplest build that can be launched and tested quickly before recommending more technical infrastructure.</pre>
+These instructions should be usable as Claude Project instructions or pasted into a prototype chat.
+
+The instructions should include:
+- role and purpose,
+- intended users,
+- answer-quality standard,
+- how to use the uploaded knowledge,
+- facts vs. judgment behavior,
+- confidence modes,
+- decision-boundary rules,
+- guardrails and do-nots,
+- source-of-truth behavior,
+- how to handle missing context,
+- how to handle conflicting sources,
+- how to avoid impersonating the Team Leader,
+- and the preferred response structure.
+
+The instructions should be clear, practical, and not overly long. They should be specific enough to guide the chatbot’s behavior, but not so long that they become hard to maintain.
+
+9. Create the V1 Test Plan
+
+Create a testing plan using 10–20 questions with verifiable answers based on the selected source material.
+
+Do not create generic test questions only. The questions should be grounded in the actual Phase 1 and Phase 2 materials.
+
+Organize test questions into categories such as:
+- business context,
+- product or project priorities,
+- team operating expectations,
+- customer or stakeholder tradeoffs,
+- Team Leader coaching style,
+- decision-prep scenarios,
+- missing-context scenarios,
+- conflicting-source scenarios,
+- guardrail/sensitive-topic scenarios,
+- unsupported-question scenarios.
+
+For each test question, include:
+- the question,
+- what source material should support the answer,
+- what a strong answer should include,
+- what failure would look like,
+- and which rubric criteria matter most.
+
+10. Create Verified Answer Notes
+
+Help me create verified answer notes for the test set.
+
+If the sources already support the answer, summarize the expected answer.
+
+If the answer cannot be verified from the sources, label it as not verifiable and recommend whether to:
+- remove the question,
+- add source material,
+- rewrite the question,
+- or use it as an insufficient-context test.
+
+11. Create Evaluation Rubric
+
+Use this rubric unless the Phase 1 or Phase 2 outputs suggest changes:
+
+- Grounding: Is the answer supported by the provided materials?
+- Real issue: Did it identify the real underlying issue?
+- Missing context: Did it ask for or name missing information when needed?
+- Goal connection: Did it connect the answer to team or business goals?
+- Practical next step: Did it give a clear next action?
+- Team Leader-style coaching: Did it reflect the Team Leader’s reasoning and coaching style without impersonating them?
+- Confidence discipline: Did it avoid false confidence?
+- Decision boundary: Did it avoid acting as a decision maker?
+- Guardrail discipline: Did it avoid mishandling sensitive, unsupported, outdated, excluded, or private information?
+
+Score each criterion from 1 to 5.
+
+12. Provide Step-by-Step Build Instructions
+
+Give me a simple, tactical build sequence for Claude.
+
+Include:
+- create the Claude Project,
+- upload the source bundle,
+- add or paste the V1 chatbot instructions,
+- start a test chat,
+- run the test questions,
+- score the answers,
+- revise instructions or sources,
+- rerun failed tests,
+- and decide whether V1 is ready for V1.5 hardening.
+
+13. Recommend What to Defer
+
+Clearly identify what should not be built in V1, such as:
+- Slack deployment,
+- Anthropic API integration,
+- retrieval databases,
+- automated transcript ingestion,
+- role-based permissions,
+- analytics,
+- and ongoing governance workflows.
+
+At the end of this phase, produce a Tactical V1 Build Package with these sections:
+
+1. V1 Scope Confirmation
+2. Final V1 Source Bundle Checklist
+3. Source Organization Plan
+4. Confidence Modes
+5. Decision-Boundary Rules
+6. Guardrails and Do-Nots
+   - source and grounding rules
+   - privacy and sensitivity rules
+   - topic exclusions
+   - source-use restrictions
+   - confidence and uncertainty rules
+7. Source-of-Truth Behavior
+8. Draft V1 Chatbot Instructions
+9. V1 Claude Project Setup Steps
+10. V1 Test Plan
+11. Verified Answer Notes
+12. Evaluation Rubric
+13. Revision Process
+14. What to Defer to V1.5 or Later
+15. V1 Readiness Checklist
+
+Keep this practical for someone without a technical background. The goal is to build the simplest useful V1 prototype that can be tested honestly before expanding.</pre>
       </div>
     </section>
 
@@ -932,92 +1566,139 @@ Keep the plan practical for someone without a deep technical background. Prefer 
     <section id="appendix">
       <div class="section-kicker">Appendix · Additional Build Details</div>
       <h2>Reference material for when the team is ready to go deeper.</h2>
-      <p class="lead">The main guide above is designed to get a Team Leader started quickly. The appendix holds the supporting build details: answer rules, knowledge-base strategy, source-of-truth hierarchy, pitfalls, tradeoffs, and the evaluation rubric.</p>
-      <div class="grid five appendix-cards" style="margin-top:18px;">
-        <a class="card appendix-card" href="#rules"><span class="pill blue">A1</span><h3>Answer Quality</h3><p>Confidence modes, decision boundaries, and initial do-nots.</p></a>
-        <a class="card appendix-card" href="#knowledge"><span class="pill teal">A2</span><h3>Knowledge Base</h3><p>How to organize facts, judgment, examples, and guardrails.</p></a>
-        <a class="card appendix-card" href="#truth"><span class="pill gold">A3</span><h3>Source of Truth</h3><p>How to resolve conflicts between formal docs and transcripts.</p></a>
-        <a class="card appendix-card" href="#pitfalls"><span class="pill blue">A4</span><h3>Pitfalls</h3><p>Alternatives, risks, and core build tradeoffs.</p></a>
-        <a class="card appendix-card" href="#rubric"><span class="pill teal">A5</span><h3>Rubric</h3><p>How to score V1 answers before expanding access.</p></a>
+      <p class="lead">The main guide is designed to get a Team Leader started quickly. The appendix holds supporting details: phase outputs, core behavior rules, transcript scoring, source hierarchy, evaluation, and common tradeoffs.</p>
+
+      <div class="grid three" style="margin-top:18px;">
+        <a class="card appendix-card" href="#phase-details">
+          <span class="pill blue">A1</span>
+          <h3>Phase Details</h3>
+          <p>Purpose and outputs for scoping, discovery, and tactical V1 build.</p>
+        </a>
+
+        <a class="card appendix-card" href="#core-concepts">
+          <span class="pill teal">A2</span>
+          <h3>Core Concepts</h3>
+          <p>Confidence modes, decision-boundary rules, guardrails, and source behavior.</p>
+        </a>
+
+        <a class="card appendix-card" href="#transcript-rubric">
+          <span class="pill gold">A3</span>
+          <h3>Transcript Rubric</h3>
+          <p>How to score transcripts for V1 inclusion or exclusion.</p>
+        </a>
+
+        <a class="card appendix-card" href="#source-truth">
+          <span class="pill blue">A4</span>
+          <h3>Source of Truth</h3>
+          <p>How the bot should weigh formal docs, transcripts, and inferred style.</p>
+        </a>
+
+        <a class="card appendix-card" href="#rubric">
+          <span class="pill teal">A5</span>
+          <h3>Evaluation Rubric</h3>
+          <p>How to score answers before expanding access.</p>
+        </a>
+
+        <a class="card appendix-card" href="#pitfalls">
+          <span class="pill gold">A6</span>
+          <h3>Pitfalls</h3>
+          <p>Common risks, alternatives, and tradeoffs.</p>
+        </a>
       </div>
     </section>
 
-    <section id="rules">
-      <div class="section-kicker">A1 · Answer Quality, Confidence, and Boundaries</div>
-      <h2>The bot must match confidence to evidence.</h2>
+    <section id="phase-details">
+      <div class="section-kicker">A1 · Phase Details</div>
+      <h2>Each phase has a clear purpose and output.</h2>
+
+      <div class="grid three" style="margin-top:18px;">
+        <article class="card">
+          <h3>Phase 1: Scoping</h3>
+          <p>Defines the project, end state, V1 scope, and V1.5–V4 roadmap. It should not deeply review documents, select transcripts, or build final chatbot instructions yet.</p>
+          <p><strong>Output:</strong> Project Scope Brief.</p>
+        </article>
+
+        <article class="card">
+          <h3>Phase 2: Discovery</h3>
+          <p>Reviews actual source material and turns messy documents/transcripts into a usable foundation for V1.</p>
+          <p><strong>Output:</strong> Discovery Assessment.</p>
+        </article>
+
+        <article class="card">
+          <h3>Phase 3: Tactical V1 Build</h3>
+          <p>Turns the scope and discovery into a working V1 Claude prototype with instructions, source organization, test questions, and evaluation process.</p>
+          <p><strong>Output:</strong> Tactical V1 Build Package.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="core-concepts">
+      <div class="section-kicker">A2 · Core Concepts for V1 Instructions</div>
+      <h2>The bot must match confidence to evidence and preserve boundaries.</h2>
+
       <div class="mode-grid" style="margin-top:18px;">
         <article class="mode">
           <h3>Strong Context</h3>
-          <p>Use when relevant, current source material clearly supports the response and there is no obvious conflict.</p>
+          <p>Use when current, relevant source material clearly supports the response and there is no obvious conflict.</p>
         </article>
+
         <article class="mode">
           <h3>Partial Context</h3>
-          <p>Use when the bot has related context but not enough for a definitive answer.</p>
+          <p>Use when some relevant context exists but important details are missing.</p>
         </article>
+
         <article class="mode">
           <h3>Insufficient Context</h3>
-          <p>Use when the bot would need to invent context or the source material does not support the answer.</p>
+          <p>Use when the source material does not support a confident answer.</p>
         </article>
+
         <article class="mode">
           <h3>Conflicting Context</h3>
-          <p>Use when sources point in different directions or newer and older materials conflict.</p>
+          <p>Use when sources point in different directions.</p>
         </article>
       </div>
+
       <div class="grid two" style="margin-top:18px;">
         <article class="card">
-          <h3>Decision-boundary rules</h3>
+          <h3>Decision-Boundary Rules</h3>
           <ul class="check-list">
-            <li>The bot can frame decisions; it should not make decisions.</li>
-            <li>The bot can recommend next steps; it should not approve budgets, hiring, strategy changes, client commitments, or personnel decisions.</li>
-            <li>The bot should not impersonate the Team Leader.</li>
-            <li>The bot must separate coaching from authority, especially on high-stakes topics.</li>
-            <li>The bot should preserve uncertainty when evidence is limited, inferential, or incomplete.</li>
+            <li>The chatbot may help frame decisions, identify tradeoffs, clarify missing context, and suggest next steps.</li>
+            <li>The chatbot must not make final decisions or approve budgets, hiring, compensation, client commitments, roadmap changes, strategy shifts, or personnel decisions.</li>
+            <li>The chatbot must not speak as the Team Leader or imply approval unless the source material explicitly says so.</li>
           </ul>
         </article>
+
         <article class="card">
-          <h3>Initial do-nots</h3>
-          <ul class="check-list">
-            <li>Do not make final decisions on the Team Leader’s behalf.</li>
-            <li>Do not invent company context when sources do not support the answer.</li>
-            <li>Do not give false confidence when evidence is weak.</li>
-            <li>Do not treat casual transcript comments as formal policy unless confirmed.</li>
-            <li>Do not quote or reveal sensitive transcript details unless approved for the intended audience.</li>
+          <h3>Guardrails and Do-Nots</h3>
+          <ul class="check-list x-list">
+            <li>Do not invent context, overclaim, treat casual transcript comments as policy, or use excluded/redaction-required sources.</li>
+            <li>Do not reveal sensitive transcript details, private personnel feedback, confidential client context, compensation details, or sensitive performance content.</li>
+            <li>Do not present unsupported speculation as Team Leader judgment.</li>
           </ul>
         </article>
       </div>
     </section>
 
-    <section id="knowledge">
-      <div class="section-kicker">A2 · Knowledge Base Strategy</div>
-      <h2>Separate facts from judgment.</h2>
-      <p class="lead">The bot needs both company knowledge and Team Leader reasoning patterns. Raw transcripts alone are not enough.</p>
-      <div class="grid four" style="margin-top:18px;">
-        <article class="card">
-          <span class="pill blue">Facts</span>
-          <h3>What is true</h3>
-          <p>Company, team, product, customer, project, strategy, operating, and delivery context.</p>
-        </article>
-        <article class="card">
-          <span class="pill teal">Judgment</span>
-          <h3>How to think</h3>
-          <p>How the Team Leader coaches, evaluates tradeoffs, gives feedback, pushes back, and defines quality.</p>
-        </article>
-        <article class="card">
-          <span class="pill gold">Examples</span>
-          <h3>What good looks like</h3>
-          <p>Curated examples of strong answers, prioritization, recommendation review, and coaching patterns.</p>
-        </article>
-        <article class="card">
-          <span class="pill blue">Guardrails</span>
-          <h3>What to avoid</h3>
-          <p>Sensitive topics, access limits, privacy notes, excluded source types, and future role-based concerns.</p>
-        </article>
+    <section id="transcript-rubric">
+      <div class="section-kicker">A3 · Transcript Selection Rubric</div>
+      <h2>Not every transcript belongs in V1.</h2>
+      <p class="lead">Transcripts should be selected based on usefulness, clarity, reusability, and sensitivity risk.</p>
+
+      <div class="rubric" style="margin-top:18px;">
+        <div class="rubric-item"><strong>Speaker identification</strong><span>The Team Leader’s comments must be easy to isolate.</span><div class="score">High / Med / Low</div></div>
+        <div class="rubric-item"><strong>Coaching density</strong><span>The transcript should contain actual coaching, feedback, or reasoning.</span><div class="score">High / Med / Low</div></div>
+        <div class="rubric-item"><strong>Decision reasoning</strong><span>The transcript should show tradeoffs, prioritization, or judgment.</span><div class="score">High / Med / Low</div></div>
+        <div class="rubric-item"><strong>Business relevance</strong><span>The transcript should support the V1 use cases.</span><div class="score">High / Med / Low</div></div>
+        <div class="rubric-item"><strong>Recency</strong><span>Newer and current materials are usually more reliable.</span><div class="score">High / Med / Low</div></div>
+        <div class="rubric-item"><strong>Reusability</strong><span>Patterns are more valuable than one-off comments.</span><div class="score">High / Med / Low</div></div>
+        <div class="rubric-item"><strong>Sensitivity risk</strong><span>Private, HR, client, or performance content may require redaction or exclusion.</span><div class="score">Review</div></div>
       </div>
     </section>
 
-    <section id="truth">
-      <div class="section-kicker">A3 · Source-of-Truth Hierarchy</div>
-      <h2>Let current, formal sources outweigh old or casual comments.</h2>
+    <section id="source-truth">
+      <div class="section-kicker">A4 · Source-of-Truth Behavior</div>
+      <h2>Current formal sources should outweigh old or casual comments.</h2>
+
       <div class="card" style="margin-top:18px;">
         <ul class="check-list">
           <li>Current strategy, operating principles, and formal company direction.</li>
@@ -1027,64 +1708,71 @@ Keep the plan practical for someone without a deep technical background. Prefer 
           <li>Inferred coaching style, reasoning patterns, and tone guidance derived from examples.</li>
         </ul>
       </div>
-    </section>
 
-    <section id="pitfalls">
-      <div class="section-kicker">A4 · Pitfalls, Alternatives, and Tradeoffs</div>
-      <h2>Avoid overbuilding before proving the idea.</h2>
-      <div class="grid three" style="margin-top:18px;">
-        <article class="card">
-          <h3>Key pitfalls</h3>
-          <ul class="check-list">
-            <li>Jumping to Slack before proving answer quality.</li>
-            <li>Dumping too many raw transcripts into the bot.</li>
-            <li>Tone-matching without judgment.</li>
-            <li>False confidence when evidence is weak.</li>
-            <li>No test set.</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Alternatives</h3>
-          <ul class="check-list">
-            <li>Start with an operating manual before creating a bot.</li>
-            <li>Build a library of coaching examples first.</li>
-            <li>Focus on one team or workflow before expanding.</li>
-            <li>Use the bot as a prep checklist generator only.</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Core tradeoffs</h3>
-          <ul class="check-list">
-            <li>Manual V1 is faster but less scalable.</li>
-            <li>Transcript-heavy sources are authentic but noisy.</li>
-            <li>Broad bots are useful but harder to govern.</li>
-            <li>Citations improve transparency but may expose sensitive context.</li>
-          </ul>
-        </article>
-      </div>
+      <p class="lead">When sources conflict, the bot should not silently resolve major conflicts. It should surface the conflict and explain what needs clarification.</p>
     </section>
 
     <section id="rubric">
-      <div class="section-kicker">A5 · Suggested Evaluation Rubric</div>
+      <div class="section-kicker">A5 · Evaluation Rubric</div>
       <h2>Score answers before expanding access.</h2>
       <p class="lead">Use 10–20 test questions with verifiable answers. Score each answer for usefulness, grounding, judgment, confidence, and boundaries.</p>
+
       <div class="rubric" style="margin-top:18px;">
         <div class="rubric-item"><strong>Grounding</strong><span>Is the answer supported by the provided materials?</span><div class="score">1–5</div></div>
-        <div class="rubric-item"><strong>Real issue</strong><span>Did it identify the underlying issue rather than only the surface ask?</span><div class="score">1–5</div></div>
+        <div class="rubric-item"><strong>Real issue</strong><span>Did it identify the real underlying issue?</span><div class="score">1–5</div></div>
         <div class="rubric-item"><strong>Missing context</strong><span>Did it ask for or name missing information when needed?</span><div class="score">1–5</div></div>
-        <div class="rubric-item"><strong>Goal connection</strong><span>Did it connect the answer to company or team goals?</span><div class="score">1–5</div></div>
+        <div class="rubric-item"><strong>Goal connection</strong><span>Did it connect the answer to team or business goals?</span><div class="score">1–5</div></div>
         <div class="rubric-item"><strong>Practical next step</strong><span>Did it give a clear next action?</span><div class="score">1–5</div></div>
-        <div class="rubric-item"><strong>Team Leader-style coaching</strong><span>Does it reflect the Team Leader’s reasoning and coaching style without impersonating them?</span><div class="score">1–5</div></div>
+        <div class="rubric-item"><strong>Team Leader-style coaching</strong><span>Did it reflect reasoning and coaching style without impersonating?</span><div class="score">1–5</div></div>
         <div class="rubric-item"><strong>Confidence discipline</strong><span>Did it avoid false confidence?</span><div class="score">1–5</div></div>
         <div class="rubric-item"><strong>Decision boundary</strong><span>Did it avoid acting as a decision maker?</span><div class="score">1–5</div></div>
+        <div class="rubric-item"><strong>Guardrail discipline</strong><span>Did it avoid mishandling sensitive, unsupported, outdated, excluded, or private information?</span><div class="score">1–5</div></div>
+      </div>
+    </section>
+
+    <section id="pitfalls">
+      <div class="section-kicker">A6 · Pitfalls, Alternatives, and Tradeoffs</div>
+      <h2>Avoid overbuilding before proving the idea.</h2>
+
+      <div class="grid three" style="margin-top:18px;">
+        <article class="card">
+          <h3>Key Pitfalls</h3>
+          <ul class="check-list x-list">
+            <li>Overbuilding too early, especially jumping to Slack before proving answer quality.</li>
+            <li>Dumping too many raw transcripts into the bot without curation or source hierarchy.</li>
+            <li>Tone-matching without judgment.</li>
+            <li>False confidence when evidence is weak.</li>
+            <li>No test set, which makes improvement subjective and hard to measure.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Alternatives</h3>
+          <ul class="check-list">
+            <li>Start with a written operating manual instead of a chatbot, then turn that manual into a bot later.</li>
+            <li>Create a library of Team Leader-style coaching examples and decision frameworks before adding transcripts.</li>
+            <li>Build a narrow bot focused on one team or one workflow first, then expand.</li>
+            <li>Use the bot only as a preparation checklist generator, not as a Q&A assistant.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Core Tradeoffs</h3>
+          <ul class="check-list">
+            <li>Manual V1 is faster but less scalable.</li>
+            <li>Transcript-heavy sources are authentic but noisy.</li>
+            <li>Broad team bots are useful but harder to govern.</li>
+            <li>Source citations add transparency but may expose sensitive context or feel less natural.</li>
+          </ul>
+        </article>
       </div>
     </section>
 
     <section id="next">
       <div class="callout">
-        <div class="section-kicker" style="color:#b9e6fe;">Final takeaway</div>
+        <div class="section-kicker" style="color:#b9e6fe;">Final Takeaway</div>
         <h2>Start small, test honestly, and only scale what works.</h2>
-        <p>The immediate move is simple: paste the master prompt into Claude, answer the first discovery question, gather a small starter source bundle, and build a V1 prototype that can be tested against grounded questions.</p>
+        <p>The immediate move is not to build the whole system. It is to define the scope, assess the best source material, build a small Claude-based V1, and verify whether the chatbot produces useful, grounded coaching responses before expanding.</p>
       </div>
     </section>
   </main>
@@ -1096,8 +1784,6 @@ Keep the plan practical for someone without a deep technical background. Prefer 
   <script>
     const appendixToggle = document.getElementById('appendixToggle');
     const appendixMenu = document.getElementById('appendixMenu');
-    const copyButton = document.getElementById('copyPrompt');
-    const promptText = document.getElementById('masterPromptText');
 
     if (appendixToggle && appendixMenu) {
       appendixToggle.addEventListener('click', function (event) {
@@ -1134,28 +1820,35 @@ Keep the plan practical for someone without a deep technical background. Prefer 
       });
     }
 
-    if (copyButton && promptText) {
-      copyButton.addEventListener('click', async function () {
-        const originalText = copyButton.textContent;
-        const textToCopy = promptText.innerText;
+    const copyButtons = document.querySelectorAll('[data-copy-target]');
+
+    copyButtons.forEach(function (button) {
+      button.addEventListener('click', async function () {
+        const targetId = button.getAttribute('data-copy-target');
+        const target = document.getElementById(targetId);
+
+        if (!target) return;
+
+        const originalText = button.textContent;
+        const textToCopy = target.innerText;
 
         try {
           await navigator.clipboard.writeText(textToCopy);
-          copyButton.textContent = 'Copied!';
+          button.textContent = 'Copied!';
         } catch (error) {
           const range = document.createRange();
-          range.selectNodeContents(promptText);
+          range.selectNodeContents(target);
           const selection = window.getSelection();
           selection.removeAllRanges();
           selection.addRange(range);
-          copyButton.textContent = 'Prompt selected';
+          button.textContent = 'Prompt selected';
         }
 
         setTimeout(function () {
-          copyButton.textContent = originalText;
+          button.textContent = originalText;
         }, 1600);
       });
-    }
+    });
   </script>
 </body>
 </html>
