@@ -920,6 +920,16 @@
       color: #17324d;
     }
 
+    .second-opinion-card {
+      border-left: 6px solid var(--blue);
+      background:
+        linear-gradient(135deg, rgba(47,128,237,.08), rgba(255,255,255,.92));
+    }
+
+    .second-opinion-card .lead {
+      font-size: 19px;
+    }
+
     @media (max-width: 980px) {
       .hero-grid,
       .grid.two,
@@ -2015,6 +2025,31 @@ Keep this practical for someone without a technical background. The goal is to b
     </section>
 
     <div class="section-divider" aria-hidden="true"></div>
+
+    <section id="second-opinion">
+      <div class="card second-opinion-card">
+        <div class="section-kicker">Before You Build</div>
+        <h2>Get a second opinion for your situation.</h2>
+    
+        <p class="lead">
+          Like what you see? Ready to build? Before you start, download the full report and bring it into Claude for a second opinion.
+        </p>
+    
+        <p>
+          Ask Claude to critique the plan for your specific team, source materials, risks, and constraints. This guide is meant to be a strong starting path, not the only possible path.
+        </p>
+    
+        <div class="quality-standard" style="margin-top:18px;">
+          Prompt to try: “Given my team, source materials, goals, and constraints, is this the best way to start building a ‘What Would I Do?’ chatbot — or is there a simpler first version I should try first?”
+        </div>
+    
+        <div class="cta-row">
+          <a class="button primary" href="https://docs.google.com/document/d/1qmQYFdVTiIOS_dvir5Kf6XNXhT2qN-DU/edit?usp=sharing&ouid=117043487168816222179&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">
+            Download the Full Report
+          </a>
+        </div>
+      </div>
+    </section>
 
     <section id="appendix">
       <div class="section-kicker">Appendix · Additional Build Details</div>
