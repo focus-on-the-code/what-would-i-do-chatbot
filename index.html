@@ -573,6 +573,309 @@
 
     .callout p { color: rgba(255,255,255,.82); }
 
+
+    /* Feedback notes */
+    .feedback-panel {
+      margin: -18px auto 24px;
+      background: rgba(255,255,255,.86);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 28px rgba(31, 42, 55, 0.07);
+      overflow: hidden;
+    }
+
+    .feedback-panel summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: 850;
+      color: var(--navy);
+      list-style: none;
+    }
+
+    .feedback-panel summary::-webkit-details-marker { display: none; }
+
+    .feedback-panel summary span {
+      color: #475467;
+      font-weight: 650;
+      font-size: 14px;
+    }
+
+    .feedback-panel summary::after {
+      content: "▾";
+      color: var(--blue);
+      font-size: 18px;
+      transition: transform .18s ease;
+    }
+
+    .feedback-panel[open] summary::after { transform: rotate(180deg); }
+
+    .feedback-body {
+      padding: 0 22px 22px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .feedback-body ol {
+      margin: 0;
+      padding-left: 22px;
+      color: #475467;
+    }
+
+    .feedback-body li + li { margin-top: 6px; }
+
+    .feedback-actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .feedback-name {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      font: inherit;
+      color: var(--ink);
+      background: white;
+    }
+
+    .feedback-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .add-note-floating,
+    .save-feedback-bar,
+    .feedback-primary,
+    .feedback-secondary {
+      font-family: inherit;
+    }
+
+    .feedback-primary,
+    .feedback-secondary {
+      min-height: 42px;
+      border-radius: 999px;
+      padding: 0 14px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .feedback-primary {
+      border: 1px solid var(--navy);
+      background: var(--navy);
+      color: white;
+    }
+
+    .feedback-secondary {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--navy);
+    }
+
+    .feedback-clear-button {
+      border-color: #f4c7c7;
+      background: #fff7f7;
+      color: #b42318;
+    }
+
+    .feedback-clear-button:hover,
+    .feedback-clear-button:focus-visible {
+      background: #fdecec;
+      outline: none;
+    }
+
+    .feedback-placement-mode {
+      cursor: crosshair;
+    }
+
+    .feedback-placement-mode .page,
+    .feedback-placement-mode main,
+    .feedback-placement-mode section {
+      cursor: crosshair;
+    }
+
+    .add-note-floating {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      min-height: 50px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.3);
+      background: var(--navy);
+      color: white;
+      box-shadow: var(--shadow);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .add-note-floating.placing {
+      background: var(--gold);
+      color: #231a0c;
+    }
+
+    .notes-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .sticky-note {
+      position: absolute;
+      width: min(280px, calc(100vw - 28px));
+      min-height: 180px;
+      background: #fff4b8;
+      border: 1px solid #e2c65f;
+      border-radius: 18px;
+      box-shadow: 0 16px 34px rgba(31, 42, 55, 0.18);
+      pointer-events: auto;
+      overflow: hidden;
+    }
+
+    .sticky-note.saved { background: #effaf7; border-color: #a9ded3; }
+    .sticky-note.failed { background: #fff1f1; border-color: #f0b4b4; }
+
+    .sticky-note-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,.32);
+      border-bottom: 1px solid rgba(31,42,55,.1);
+    }
+
+    .sticky-note-title {
+      font-weight: 900;
+      color: #463a12;
+      font-size: 13px;
+    }
+
+    .sticky-note-status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border-radius: 999px;
+      padding: 0 8px;
+      background: rgba(255,255,255,.62);
+      color: #6b5a16;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .sticky-note-actions {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .sticky-note-action {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid rgba(31,42,55,.12);
+      background: rgba(255,255,255,.64);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .sticky-note textarea {
+      width: 100%;
+      min-height: 126px;
+      resize: vertical;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      padding: 12px;
+      font: inherit;
+      color: #2f2a17;
+    }
+
+    .sticky-note-meta {
+      padding: 0 12px 10px;
+      color: rgba(31,42,55,.64);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .sticky-note.collapsed {
+      width: auto;
+      min-height: 0;
+      border-radius: 999px;
+      background: var(--gold);
+      border-color: #bd8422;
+    }
+
+    .sticky-note.collapsed .sticky-note-body,
+    .sticky-note.collapsed .sticky-note-meta,
+    .sticky-note.collapsed .sticky-note-status,
+    .sticky-note.collapsed .sticky-note-delete {
+      display: none;
+    }
+
+    .sticky-note.collapsed .sticky-note-header {
+      border: 0;
+      padding: 8px 10px;
+      gap: 8px;
+    }
+
+    .sticky-note.collapsed .sticky-note-title {
+      color: #231a0c;
+    }
+
+    .save-feedback-bar {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      z-index: 85;
+      display: none;
+      align-items: center;
+      gap: 14px;
+      width: min(560px, calc(100vw - 32px));
+      padding: 12px 14px 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.96);
+      box-shadow: var(--shadow);
+      color: #475467;
+      font-weight: 800;
+    }
+
+    .save-feedback-bar.visible { display: flex; }
+
+    .save-feedback-bar span { flex: 1; }
+
+    .save-feedback-bar button {
+      min-height: 38px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--teal);
+      color: white;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .save-feedback-bar button:disabled {
+      opacity: .62;
+      cursor: wait;
+    }
+
     footer {
       padding: 28px 0 56px;
       color: var(--muted);
@@ -675,6 +978,28 @@
         align-items: flex-start;
         flex-direction: column;
       }
+
+      .feedback-body {
+        grid-template-columns: 1fr;
+      }
+
+      .feedback-panel summary {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .add-note-floating {
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .save-feedback-bar {
+        bottom: 74px;
+        border-radius: 22px;
+        align-items: stretch;
+        flex-direction: column;
+      }
+
     }
   </style>
 </head>
@@ -702,6 +1027,35 @@
       </aside>
     </div>
   </header>
+
+
+
+  <details class="feedback-panel page feedback-ignore" id="feedbackPanel">
+    <summary>
+      💬 Reviewing this page? Leave feedback
+      <span>Add sticky notes anywhere, then send them when you’re done.</span>
+    </summary>
+    <div class="feedback-body">
+      <div>
+        <h3>How feedback notes work</h3>
+        <ol>
+          <li>Click <strong>Add Note</strong>.</li>
+          <li>Click or tap where the feedback belongs.</li>
+          <li>Type your note. Collapse notes if they block the page.</li>
+          <li>Click <strong>Save Feedback</strong> when finished.</li>
+        </ol>
+      </div>
+      <div class="feedback-actions">
+        <label>
+          <strong>Your name / initials</strong>
+          <input class="feedback-name feedback-ignore" id="feedbackReviewer" type="text" maxlength="80" placeholder="Optional" />
+        </label>
+        <button class="feedback-primary feedback-ignore" id="feedbackPanelAddNote" type="button">+ Add Note</button>
+        <button class="feedback-secondary feedback-clear-button feedback-ignore" id="clearFeedbackButton" type="button">Clear Local Feedback</button>
+        <p class="feedback-note">Notes stay private in this browser until you save them. Saved notes are sent to the page owner’s feedback spreadsheet. Clearing local feedback only removes notes from this browser; it does not delete anything already submitted.</p>
+      </div>
+    </div>
+  </details>
 
   <div class="nav-wrap">
     <nav class="page" aria-label="Page navigation">
@@ -1777,11 +2131,356 @@ Keep this practical for someone without a technical background. The goal is to b
     </section>
   </main>
 
+
+
+  <div id="notesLayer" class="notes-layer" aria-live="polite"></div>
+  <button id="floatingAddNote" class="add-note-floating feedback-ignore" type="button">+ Add Note</button>
+  <div id="saveFeedbackBar" class="save-feedback-bar feedback-ignore" role="status" aria-live="polite">
+    <span id="saveFeedbackText">0 unsaved notes</span>
+    <button id="saveFeedbackButton" type="button">Save Feedback</button>
+  </div>
+
   <footer class="page">
     What Would I Do? Chatbot Build Guide · Team Leader Coaching Assistant · Developed by TTS Products May 2026
   </footer>
 
   <script>
+
+    // Feedback notes configuration
+    // Replace this placeholder with your deployed Google Apps Script Web App URL.
+    // Example: const FEEDBACK_ENDPOINT = "https://script.google.com/macros/s/AKfycb.../exec";
+    const FEEDBACK_ENDPOINT = "https://script.google.com/macros/s/AKfycbxAju4TkFzWWJy5LhxiMXJw9WjqmFe4-ngfbWM5rTS1DvZ1jN0jZihl1FKevCWcAQiJ/exec";
+
+    const FEEDBACK_STORAGE_KEY = "wwid-feedback-notes-v1";
+    const FEEDBACK_REVIEWER_KEY = "wwid-feedback-reviewer-v1";
+    const FEEDBACK_MAX_NOTES_PER_SAVE = 25;
+    const FEEDBACK_MAX_NOTE_CHARS = 1000;
+    const FEEDBACK_MIN_SAVE_INTERVAL_MS = 2000;
+
+    const notesLayer = document.getElementById('notesLayer');
+    const floatingAddNote = document.getElementById('floatingAddNote');
+    const feedbackPanelAddNote = document.getElementById('feedbackPanelAddNote');
+    const feedbackReviewer = document.getElementById('feedbackReviewer');
+    const clearFeedbackButton = document.getElementById('clearFeedbackButton');
+    const saveFeedbackBar = document.getElementById('saveFeedbackBar');
+    const saveFeedbackText = document.getElementById('saveFeedbackText');
+    const saveFeedbackButton = document.getElementById('saveFeedbackButton');
+
+    let feedbackNotes = [];
+    let placingNote = false;
+    let lastSaveAttemptAt = 0;
+
+    function loadFeedbackState() {
+      try {
+        feedbackNotes = JSON.parse(localStorage.getItem(FEEDBACK_STORAGE_KEY) || '[]');
+      } catch (error) {
+        feedbackNotes = [];
+      }
+
+      if (feedbackReviewer) {
+        feedbackReviewer.value = localStorage.getItem(FEEDBACK_REVIEWER_KEY) || '';
+      }
+    }
+
+    function saveFeedbackState() {
+      localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify(feedbackNotes));
+      if (feedbackReviewer) {
+        localStorage.setItem(FEEDBACK_REVIEWER_KEY, feedbackReviewer.value.trim());
+      }
+      updateSaveFeedbackBar();
+    }
+
+    function getSectionInfoFromPoint(clientX, clientY) {
+      const element = document.elementFromPoint(clientX, clientY);
+      const section = element ? element.closest('section') : null;
+      const heading = section ? section.querySelector('h2, h3') : null;
+
+      return {
+        sectionId: section && section.id ? section.id : '',
+        sectionHeading: heading ? heading.innerText.trim() : ''
+      };
+    }
+
+    function createFeedbackNote(pageX, pageY, clientX, clientY) {
+      if (feedbackNotes.length >= 50) {
+        alert('You already have 50 notes on this page. Save or delete some before adding more.');
+        return;
+      }
+
+      const sectionInfo = getSectionInfoFromPoint(clientX, clientY);
+      const note = {
+        id: 'note-' + Date.now() + '-' + Math.random().toString(16).slice(2),
+        x: Math.max(12, Math.round(pageX)),
+        y: Math.max(12, Math.round(pageY)),
+        text: '',
+        collapsed: false,
+        status: 'unsaved',
+        statusMessage: 'Unsaved',
+        createdAt: new Date().toISOString(),
+        savedAt: '',
+        pageTitle: document.title,
+        pageUrl: window.location.href,
+        sectionId: sectionInfo.sectionId,
+        sectionHeading: sectionInfo.sectionHeading,
+        viewportWidth: window.innerWidth,
+        viewportHeight: window.innerHeight
+      };
+
+      feedbackNotes.push(note);
+      saveFeedbackState();
+      renderFeedbackNotes();
+
+      setTimeout(function () {
+        const textarea = document.querySelector('[data-note-text="' + note.id + '"]');
+        if (textarea) textarea.focus();
+      }, 0);
+    }
+
+    function setPlacementMode(isPlacing) {
+      placingNote = isPlacing;
+      document.body.classList.toggle('feedback-placement-mode', placingNote);
+
+      if (floatingAddNote) {
+        floatingAddNote.classList.toggle('placing', placingNote);
+        floatingAddNote.textContent = placingNote ? 'Tap location · Cancel' : '+ Add Note';
+      }
+    }
+
+    function togglePlacementMode(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      setPlacementMode(!placingNote);
+    }
+
+    function renderFeedbackNotes() {
+      if (!notesLayer) return;
+      notesLayer.innerHTML = '';
+
+      feedbackNotes.forEach(function (note) {
+        const noteEl = document.createElement('article');
+        noteEl.className = 'sticky-note feedback-ignore ' + (note.collapsed ? 'collapsed ' : '') + (note.status || 'unsaved');
+        noteEl.style.left = Math.min(note.x, document.documentElement.scrollWidth - 300) + 'px';
+        noteEl.style.top = note.y + 'px';
+        noteEl.dataset.noteId = note.id;
+
+        const statusText = note.statusMessage || (note.status === 'saved' ? 'Saved' : note.status === 'failed' ? 'Failed' : 'Unsaved');
+        const sectionText = note.sectionHeading ? 'Section: ' + note.sectionHeading : 'Page note';
+
+        noteEl.innerHTML = `
+          <div class="sticky-note-header">
+            <div class="sticky-note-title">💬 Note</div>
+            <span class="sticky-note-status">${escapeHtml(statusText)}</span>
+            <div class="sticky-note-actions">
+              <button class="sticky-note-action" type="button" data-note-collapse="${note.id}" title="Collapse or expand">${note.collapsed ? '+' : '–'}</button>
+              <button class="sticky-note-action sticky-note-delete" type="button" data-note-delete="${note.id}" title="Delete">×</button>
+            </div>
+          </div>
+          <div class="sticky-note-body">
+            <textarea data-note-text="${note.id}" maxlength="${FEEDBACK_MAX_NOTE_CHARS}" placeholder="Type feedback here...">${escapeHtml(note.text || '')}</textarea>
+          </div>
+          <div class="sticky-note-meta">${escapeHtml(sectionText)}</div>
+        `;
+
+        notesLayer.appendChild(noteEl);
+      });
+
+      updateSaveFeedbackBar();
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function updateSaveFeedbackBar() {
+      if (!saveFeedbackBar || !saveFeedbackText) return;
+
+      const unsavedCount = feedbackNotes.filter(function (note) {
+        return note.status !== 'saved' && (note.text || '').trim().length > 0;
+      }).length;
+
+      saveFeedbackBar.classList.toggle('visible', unsavedCount > 0);
+      saveFeedbackText.textContent = unsavedCount === 1 ? '1 unsaved note' : unsavedCount + ' unsaved notes';
+    }
+
+    function updateNote(id, updates) {
+      const note = feedbackNotes.find(function (item) { return item.id === id; });
+      if (!note) return;
+      Object.assign(note, updates);
+      saveFeedbackState();
+    }
+
+    function clearLocalFeedback() {
+      const confirmed = window.confirm(
+        'Clear all local feedback notes from this browser? This will not delete anything already saved to the spreadsheet.'
+      );
+
+      if (!confirmed) return;
+
+      localStorage.removeItem(FEEDBACK_STORAGE_KEY);
+      feedbackNotes = [];
+      setPlacementMode(false);
+      renderFeedbackNotes();
+      updateSaveFeedbackBar();
+    }
+
+    async function saveFeedbackToSheet() {
+      if (!saveFeedbackButton) return;
+
+      const now = Date.now();
+      if (now - lastSaveAttemptAt < FEEDBACK_MIN_SAVE_INTERVAL_MS) {
+        alert('Please wait a moment before saving again.');
+        return;
+      }
+      lastSaveAttemptAt = now;
+
+      const endpointMissing = !FEEDBACK_ENDPOINT || FEEDBACK_ENDPOINT.includes('PASTE_GOOGLE_APPS_SCRIPT');
+      const notesToSave = feedbackNotes
+        .filter(function (note) { return note.status !== 'saved' && (note.text || '').trim().length > 0; })
+        .slice(0, FEEDBACK_MAX_NOTES_PER_SAVE);
+
+      if (!notesToSave.length) return;
+
+      if (endpointMissing) {
+        notesToSave.forEach(function (note) {
+          note.status = 'failed';
+          note.statusMessage = 'Endpoint missing';
+        });
+        saveFeedbackState();
+        renderFeedbackNotes();
+        alert('Feedback endpoint missing. Paste your Google Apps Script Web App URL into FEEDBACK_ENDPOINT.');
+        return;
+      }
+
+      saveFeedbackButton.disabled = true;
+      saveFeedbackButton.textContent = 'Saving...';
+
+      notesToSave.forEach(function (note) {
+        note.status = 'saving';
+        note.statusMessage = 'Saving';
+      });
+      saveFeedbackState();
+      renderFeedbackNotes();
+
+      const reviewerName = feedbackReviewer ? feedbackReviewer.value.trim() : '';
+      const payload = {
+        submittedAt: new Date().toISOString(),
+        reviewerName: reviewerName,
+        pageTitle: document.title,
+        pageUrl: window.location.href,
+        userAgent: navigator.userAgent,
+        notes: notesToSave.map(function (note) {
+          return {
+            noteId: note.id,
+            noteText: (note.text || '').trim().slice(0, FEEDBACK_MAX_NOTE_CHARS),
+            xPosition: note.x,
+            yPosition: note.y,
+            sectionId: note.sectionId,
+            sectionHeading: note.sectionHeading,
+            viewportWidth: note.viewportWidth,
+            viewportHeight: note.viewportHeight,
+            createdAt: note.createdAt
+          };
+        })
+      };
+
+      try {
+        await fetch(FEEDBACK_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        const savedAt = new Date().toISOString();
+        notesToSave.forEach(function (note) {
+          note.status = 'saved';
+          note.statusMessage = 'Saved';
+          note.savedAt = savedAt;
+        });
+      } catch (error) {
+        notesToSave.forEach(function (note) {
+          note.status = 'failed';
+          note.statusMessage = 'Failed — retry';
+        });
+      } finally {
+        saveFeedbackButton.disabled = false;
+        saveFeedbackButton.textContent = 'Save Feedback';
+        saveFeedbackState();
+        renderFeedbackNotes();
+      }
+    }
+
+    if (floatingAddNote) floatingAddNote.addEventListener('click', togglePlacementMode);
+    if (feedbackPanelAddNote) feedbackPanelAddNote.addEventListener('click', togglePlacementMode);
+    if (clearFeedbackButton) clearFeedbackButton.addEventListener('click', clearLocalFeedback);
+    if (saveFeedbackButton) saveFeedbackButton.addEventListener('click', saveFeedbackToSheet);
+    if (feedbackReviewer) feedbackReviewer.addEventListener('input', saveFeedbackState);
+
+    document.addEventListener('click', function (event) {
+      const collapseButton = event.target.closest('[data-note-collapse]');
+      const deleteButton = event.target.closest('[data-note-delete]');
+
+      if (collapseButton) {
+        const id = collapseButton.getAttribute('data-note-collapse');
+        const note = feedbackNotes.find(function (item) { return item.id === id; });
+        if (note) {
+          note.collapsed = !note.collapsed;
+          saveFeedbackState();
+          renderFeedbackNotes();
+        }
+        return;
+      }
+
+      if (deleteButton) {
+        const id = deleteButton.getAttribute('data-note-delete');
+        feedbackNotes = feedbackNotes.filter(function (note) { return note.id !== id; });
+        saveFeedbackState();
+        renderFeedbackNotes();
+        return;
+      }
+
+      if (!placingNote) return;
+      if (event.target.closest('.feedback-ignore, button, input, textarea, a, pre, nav')) return;
+
+      createFeedbackNote(event.pageX, event.pageY, event.clientX, event.clientY);
+      setPlacementMode(false);
+    });
+
+    document.addEventListener('input', function (event) {
+      const textarea = event.target.closest('[data-note-text]');
+      if (!textarea) return;
+
+      const id = textarea.getAttribute('data-note-text');
+      updateNote(id, {
+        text: textarea.value.slice(0, FEEDBACK_MAX_NOTE_CHARS),
+        status: 'unsaved',
+        statusMessage: 'Unsaved'
+      });
+      renderFeedbackNotes();
+
+      const nextTextarea = document.querySelector('[data-note-text="' + id + '"]');
+      if (nextTextarea) {
+        nextTextarea.focus();
+        nextTextarea.selectionStart = nextTextarea.selectionEnd = nextTextarea.value.length;
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && placingNote) {
+        setPlacementMode(false);
+      }
+    });
+
+    loadFeedbackState();
+    renderFeedbackNotes();
+
     const appendixToggle = document.getElementById('appendixToggle');
     const appendixMenu = document.getElementById('appendixMenu');
 
