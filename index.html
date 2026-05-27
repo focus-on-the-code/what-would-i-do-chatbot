@@ -160,6 +160,34 @@
       outline: none;
     }
 
+    .prompt-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .prompt-toggle-button {
+      display: none;
+      min-height: 38px;
+      padding: 0 13px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      color: white;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .prompt-toggle-button:hover,
+    .prompt-toggle-button:focus-visible {
+      background: rgba(255,255,255,.18);
+      outline: none;
+    }
+
     .section-divider {
       height: 1px;
       width: 100%;
@@ -1001,13 +1029,66 @@
       .add-note-floating {
         right: 12px;
         bottom: 12px;
+        min-height: 48px;
+        padding: 0 16px;
       }
 
       .save-feedback-bar {
-        bottom: 74px;
-        border-radius: 22px;
-        align-items: stretch;
-        flex-direction: column;
+        left: auto;
+        right: 12px;
+        bottom: 72px;
+        transform: none;
+        width: auto;
+        max-width: calc(100vw - 24px);
+        min-height: 46px;
+        padding: 6px;
+        border-radius: 999px;
+        gap: 8px;
+        background: rgba(255,255,255,.97);
+      }
+
+      .save-feedback-bar.visible {
+        display: inline-flex;
+      }
+
+      .save-feedback-bar span {
+        display: none;
+      }
+
+      .save-feedback-bar button {
+        min-height: 42px;
+        padding: 0 16px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+
+      .prompt-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .prompt-toggle-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .prompt-box {
+        max-height: 92px;
+        overflow: hidden;
+      }
+
+      .prompt-box.prompt-expanded {
+        max-height: none;
+      }
+
+      .prompt-box pre {
+        display: none;
+        max-height: 520px;
+      }
+
+      .prompt-box.prompt-expanded pre {
+        display: block;
       }
 
     }
@@ -1350,7 +1431,10 @@
             <div class="dots"><span></span><span></span><span></span></div>
             Prompt 1 · Phase 1 Scoping
           </div>
-          <button class="copy-button" type="button" data-copy-target="phase1Prompt">Copy Phase 1 Prompt</button>
+          <div class="prompt-actions">
+            <button class="copy-button" type="button" data-copy-target="phase1Prompt">Copy Phase 1 Prompt</button>
+            <button class="prompt-toggle-button" type="button" aria-expanded="false">Expand</button>
+          </div>
         </div>
 
         <pre id="phase1Prompt">You are helping me scope a “What Would I Do?” chatbot for a team.
@@ -1436,7 +1520,10 @@ Keep this practical for someone without a technical background. Favor the simple
             <div class="dots"><span></span><span></span><span></span></div>
             Prompt 2 · Phase 2 Discovery
           </div>
-          <button class="copy-button" type="button" data-copy-target="phase2Prompt">Copy Phase 2 Prompt</button>
+          <div class="prompt-actions">
+            <button class="copy-button" type="button" data-copy-target="phase2Prompt">Copy Phase 2 Prompt</button>
+            <button class="prompt-toggle-button" type="button" aria-expanded="false">Expand</button>
+          </div>
         </div>
 
         <pre id="phase2Prompt">You are helping me build a “What Would I Do?” chatbot for a team.
@@ -1596,7 +1683,10 @@ Keep this practical for someone without a technical background. Your goal is to 
             <div class="dots"><span></span><span></span><span></span></div>
             Prompt 3 · Phase 3 Tactical V1 Build
           </div>
-          <button class="copy-button" type="button" data-copy-target="phase3Prompt">Copy Phase 3 Prompt</button>
+          <div class="prompt-actions">
+            <button class="copy-button" type="button" data-copy-target="phase3Prompt">Copy Phase 3 Prompt</button>
+            <button class="prompt-toggle-button" type="button" aria-expanded="false">Expand</button>
+          </div>
         </div>
 
         <pre id="phase3Prompt">You are helping me build V1 of a “What Would I Do?” chatbot for a team.
@@ -2147,7 +2237,7 @@ Keep this practical for someone without a technical background. The goal is to b
   <button id="floatingAddNote" class="add-note-floating feedback-ignore" type="button">+ Add Note</button>
   <div id="saveFeedbackBar" class="save-feedback-bar feedback-ignore" role="status" aria-live="polite">
     <span id="saveFeedbackText">0 unsaved notes</span>
-    <button id="saveFeedbackButton" type="button">Save Feedback</button>
+    <button id="saveFeedbackButton" type="button">Save</button>
   </div>
 
   <footer class="page">
@@ -2425,7 +2515,7 @@ Keep this practical for someone without a technical background. The goal is to b
         });
       } finally {
         saveFeedbackButton.disabled = false;
-        saveFeedbackButton.textContent = 'Save Feedback';
+        saveFeedbackButton.textContent = 'Save';
         saveFeedbackState();
         renderFeedbackNotes();
       }
@@ -2562,6 +2652,23 @@ Keep this practical for someone without a technical background. The goal is to b
         }, 1600);
       });
     });
+
+    const promptToggleButtons = document.querySelectorAll('.prompt-toggle-button');
+
+    promptToggleButtons.forEach(function (button) {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const promptBox = button.closest('.prompt-box');
+        if (!promptBox) return;
+
+        const isExpanded = promptBox.classList.toggle('prompt-expanded');
+        button.textContent = isExpanded ? 'Collapse' : 'Expand';
+        button.setAttribute('aria-expanded', String(isExpanded));
+      });
+    });
+
   </script>
 </body>
 </html>
